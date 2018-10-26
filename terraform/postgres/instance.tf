@@ -1,13 +1,3 @@
-# GCE image name.
-variable "gce_image" {
-  default =  "ubuntu-1604-xenial-v20181023"
-}
-#default =  "ubuntu-1404-trusty-v20180423"
-
-variable "gce_zone" {
-  description = "Run the gce Instances in these Availability Zones"
-  default = "europe-west1-b"
-}
 
 resource "google_compute_firewall" "default" {
   name    = "postgres-firewall"
@@ -22,7 +12,7 @@ resource "google_compute_instance" "postgres" {
   // Adjust as desired
   name  = "postgres"
   // yields "test1", "test2", etc. It's also the machine's name and hostname
-  machine_type = "g1-small"
+  machine_type = "${var.machine_type}"
   // smallest (CPU &amp; RAM) available instance
   zone  =  "${var.gce_zone}"
   // yields "europe-west1-d" as setup previously. Places your VM in Europe
