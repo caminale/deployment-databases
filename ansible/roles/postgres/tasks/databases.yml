@@ -1,0 +1,41 @@
+---
+
+- name: Ensure that there no others db already created
+  postgresql_db:
+    name: "{{ item.name }}"
+    state: absent
+  with_items: "{{ postgresql_databases }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+
+- name: Ensure PostgreSQL databases are present.
+  postgresql_db:
+    name: "{{ item.name }}"
+  with_items: "{{ postgresql_databases }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true
+
+- name: add extensions for gen_uuid()
+  postgresql_ext :
+    db: "{{ item.name }}"
+    name: "{{ item.extension_gen_uuid }}"
+  with_items: "{{ postgresql_databases }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+
+- name: Restore backup data
+  postgresql_db:
+    name: "{{ item.name }}"
+    state: restore
+    target: "{{ postgresql_data_dir }}/backup.sql"
+  with_items: "{{ postgresql_databases }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+
+- name: Delete backup file
+  file:
+    path: "{{ postgresql_data_dir }}/backup.sql"
+    state: absent

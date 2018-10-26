@@ -1,0 +1,24 @@
+---
+- name: Generic host setup + build cockroach cluster + create db
+  hosts: cockroach
+  become: true
+  vars:
+    cockroach_version: cockroach-v2.0.5.linux-amd64
+    db_name: octo
+  tasks:
+    - include_role:
+        name: host-setup
+    - include_role:
+        name: cockroach-install
+      vars:
+        install_version: "{{ cockroach_version }}"
+    - include_role:
+        name: cockroach-cluster
+      vars:
+        install_version: "{{ cockroach_version }}"
+    - include_role:
+        name: cockroach-db
+      vars:
+        database: "{{ db_name }}"
+        install_version: "{{ cockroach_version }}"
+...

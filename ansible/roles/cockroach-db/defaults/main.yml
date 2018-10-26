@@ -1,0 +1,8 @@
+---
+# defaults file for cockroach-db
+
+install_location: /var/lib/cockroach
+cluster_master: "{{ hostvars[play_hosts[0]].ansible_all_ipv4_addresses }}"
+private_ip: "{{ ansible_all_ipv4_addresses }}"
+name_table: accounts
+path_back_up: /opt/backup.sql

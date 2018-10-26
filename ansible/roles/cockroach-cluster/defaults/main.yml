@@ -1,0 +1,9 @@
+---
+# defaults file for cockroach-cluster
+
+cluster_master: "{{ hostvars[play_hosts[0]].ansible_all_ipv4_addresses }}"
+private_ip: "{{ ansible_all_ipv4_addresses }}"
+install_location: /var/lib/cockroach
+stop_cluster: False
+check_status: False
+reinstall_cluster: False

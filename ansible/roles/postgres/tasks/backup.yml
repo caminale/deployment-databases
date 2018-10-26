@@ -1,0 +1,12 @@
+---
+
+- name: Create a dump
+  postgresql_db:
+    name: "{{ item.name }}"
+    state: dump
+    target: "{{ postgresql_data_dir }}/backup.sql"
+  with_items: "{{ postgresql_databases }}"
+  become: true
+  become_user: "{{ postgresql_user }}"
+
+...

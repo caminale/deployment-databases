@@ -1,0 +1,6 @@
+---
+- name: Generic host setup
+  hosts: postgres
+  become: yes
+  roles:
+    - role: postgres
