@@ -34,7 +34,7 @@ resource "null_resource" "cluster" {
   provisioner "local-exec" {
     command = <<EOT
       sleep 40;
-      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --u $USER --private-key ~/.ssh/google_compute_engine -i /usr/local/Cellar/terraform-inventory/0.6.1/bin/terraform-inventory  ../ansible/install-postgres.yml --extra-vars "ansible_sudo_pass=0205"
+      ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --u $USER --private-key ~/.ssh/google_compute_engine -i /usr/bin/terraform-inventory  ../ansible/install-postgres.yml --extra-vars "ansible_sudo_pass=0205"
     EOT
   }
 }
