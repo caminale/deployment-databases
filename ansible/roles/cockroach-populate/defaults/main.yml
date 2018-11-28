@@ -1,0 +1,6 @@
+---
+
+cluster_master: "{{ hostvars[play_hosts[0]].ansible_all_ipv4_addresses }}"
+private_ip: "{{ ansible_all_ipv4_addresses }}"
+database_name: "octo"
+url_bucket_dump: "gs://octo-bench/database-octo-V2"

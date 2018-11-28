@@ -1,0 +1,5 @@
+---
+
+- name: Populate cockroach via dump from google bucket
+  command: cockroach  RESTORE DATABASE "{{ database_name }}" from "{{ url_bucket_dump }}";
+  when: private_ip == cluster_master

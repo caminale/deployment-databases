@@ -1,0 +1,6 @@
+---
+- name: Generic host setup
+  hosts: cockroach
+  become: yes
+
+
