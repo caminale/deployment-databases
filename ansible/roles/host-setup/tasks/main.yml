@@ -31,3 +31,9 @@
     dest: "{{ ssh_remote }}"
     mode: 0777
   when: file.stat.exists
+
+- name: SYSTEM - Set authorized key for test_user took from file
+  authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ ssh_remote }}"
