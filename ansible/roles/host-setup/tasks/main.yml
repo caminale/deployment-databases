@@ -20,3 +20,14 @@
   shell: "ntpdate -u 0.rhel.pool.ntp.org"
   when: sync_clocks
   tags: ntp
+
+- name: get file stat to be able to perform a check in the following task
+  local_action: stat path="{{ ssh_local }}"
+  register: file
+
+- name: Copy ssh to acces to instances
+  copy:
+    src:  "{{ ssh_local }}"
+    dest: "{{ ssh_remote }}"
+    mode: 0777
+  when: file.stat.exists

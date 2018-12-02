@@ -1,3 +1,5 @@
 ---
 # defaults file for host-setup
 sync_clocks: False
+ssh_local: '~/.ssh/id_rsa.pub'
+ssh_remote: '/home/$USER/.ssh/'
